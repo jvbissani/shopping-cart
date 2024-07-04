@@ -7,15 +7,17 @@ import './SearchBar.css'
 
 function SearchBar() {
 
-  const { setProducts } = useContext(AppContext);
+  const { setProducts, setLoading } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const products = await fetchProducts(searchValue);
 
     setProducts(products);
+    setLoading(false);
     setSearchValue('');
   };
 
